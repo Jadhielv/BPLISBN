@@ -38,6 +38,7 @@
     public class Book
     {
         public string? ISBN { get; set; }
+        public DataRetrievalType? DataRetrievalType { get; set; }
         public string[]? publishers { get; set; }
         public int number_of_pages { get; set; }
         public string[]? isbn_10 { get; set; }

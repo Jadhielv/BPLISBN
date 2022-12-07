@@ -2,7 +2,7 @@
 
 namespace BPLISBN.Models
 {
-    internal enum DataRetrievalType
+    public enum DataRetrievalType
     {
         [Description("Server")]
         Server = 1,
