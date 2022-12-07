@@ -1,41 +1,41 @@
 ﻿namespace BPLISBN.Models
 {
-    abstract class ClassBaseKey
+    public abstract class ClassBaseKey
     {
         public string? key { get; set; }
     }
 
-    abstract class ClassBaseDate
+    public abstract class ClassBaseDate
     {
         public string? type { get; set; }
         public DateTime value { get; set; }
     }
 
-    internal class Author : ClassBaseKey { }
+    public class Author : ClassBaseKey { }
 
-    internal class Language : ClassBaseKey { }
+    public class Language : ClassBaseKey { }
 
-    internal class Work : ClassBaseKey { }
+    public class Work : ClassBaseKey { }
 
-    internal class Type : ClassBaseKey { }
+    public class Type : ClassBaseKey { }
 
-    internal class Identifier
+    public class Identifier
     {
         public string[]? goodreads { get; set; }
         public string[]? librarything { get; set; }
     }
 
-    internal class FirstSentence
+    public class FirstSentence
     {
         public string? type { get; set; }
         public string? value { get; set; }
     }
 
-    internal class Created : ClassBaseDate { }
+    public class Created : ClassBaseDate { }
 
-    internal class LastModified : ClassBaseDate { }
+    public class LastModified : ClassBaseDate { }
 
-    internal class Book
+    public class Book
     {
         public string[]? publishers { get; set; }
         public int number_of_pages { get; set; }
