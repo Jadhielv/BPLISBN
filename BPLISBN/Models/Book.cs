@@ -41,6 +41,7 @@
         public DataRetrievalType? DataRetrievalType { get; set; }
         public string[]? publishers { get; set; }
         public int number_of_pages { get; set; }
+        public string? subtitle { get; set; }
         public string[]? isbn_10 { get; set; }
         public int[]? covers { get; set; }
         public string? key { get; set; }
