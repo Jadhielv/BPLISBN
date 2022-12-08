@@ -21,7 +21,6 @@ namespace BPLISBN.Services
             var _outputFolder = string.Empty;
             var builder = new ConfigurationBuilder()
                  .AddJsonFile($"appsettings.json", true, true);
-
             var config = builder.Build();
             _outputFolder = config["AppSettings:OutputFolder"];
 

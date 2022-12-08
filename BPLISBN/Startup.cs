@@ -21,7 +21,6 @@ namespace BPLISBN
             var _inputFolder = string.Empty;
             var builder = new ConfigurationBuilder()
                  .AddJsonFile($"appsettings.json", true, true);
-
             var config = builder.Build();
             _inputFolder = config["AppSettings:InputFolder"];
 

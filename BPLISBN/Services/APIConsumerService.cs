@@ -16,7 +16,6 @@ namespace BPLISBN.Services
 
             var builder = new ConfigurationBuilder()
                  .AddJsonFile($"appsettings.json", true, true);
-
             var config = builder.Build();
             _apiEndpoint = config["AppSettings:APIEndpoint"];
         }
