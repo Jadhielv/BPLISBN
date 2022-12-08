@@ -1,24 +1,29 @@
 ﻿using BPLISBN.Extensions;
 using BPLISBN.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace BPLISBN.Services
 {
     public class FileConstructorService : IFileConstructorService
     {
         private readonly ILogger<FileConstructorService> _logger;
-        private readonly string? _outputFolder;
 
-        public FileConstructorService(ILogger<FileConstructorService> logger, IOptions<AppSettings> settings)
+        public FileConstructorService(ILogger<FileConstructorService> logger)
         {
             _logger = logger;
-            _outputFolder = settings.Value.OutputFolder;
         }
 
         public void Run(List<Book> items, string fileName)
         {
             _logger.LogInformation("Start creating the file");
+
+            var _outputFolder = string.Empty;
+            var builder = new ConfigurationBuilder()
+                 .AddJsonFile($"appsettings.json", true, true);
+
+            var config = builder.Build();
+            _outputFolder = config["AppSettings:OutputFolder"];
 
             using (StreamWriter writer = new($"{_outputFolder}\\{fileName}.csv"))
             {

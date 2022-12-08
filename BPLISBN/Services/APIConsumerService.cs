@@ -1,6 +1,6 @@
 ﻿using BPLISBN.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace BPLISBN.Services
@@ -10,10 +10,15 @@ namespace BPLISBN.Services
         private readonly ILogger<APIConsumerService> _logger;
         private readonly string? _apiEndpoint;
 
-        public APIConsumerService(ILogger<APIConsumerService> logger, IOptions<AppSettings> settings)
+        public APIConsumerService(ILogger<APIConsumerService> logger)
         {
             _logger = logger;
-            _apiEndpoint = settings.Value.APIEndpoint;
+
+            var builder = new ConfigurationBuilder()
+                 .AddJsonFile($"appsettings.json", true, true);
+
+            var config = builder.Build();
+            _apiEndpoint = config["AppSettings:APIEndpoint"];
         }
 
         public async Task<Book?> CallAPI(string item, string fileName)

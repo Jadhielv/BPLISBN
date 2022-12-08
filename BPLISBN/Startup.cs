@@ -18,8 +18,6 @@ namespace BPLISBN
 
         public void Start()
         {
-            _logger.LogInformation("Starting");
-
             var _inputFolder = string.Empty;
             var builder = new ConfigurationBuilder()
                  .AddJsonFile($"appsettings.json", true, true);
