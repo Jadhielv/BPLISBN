@@ -1,6 +1,6 @@
 ﻿using BPLISBN.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace BPLISBN
 {
@@ -8,18 +8,19 @@ namespace BPLISBN
     {
         public static void Main(string[] args)
         {
-            IHost host = CreateHostBuilder(args).Build();
-            host.Run();
-        }
+            var serviceProvider = new ServiceCollection()
+                .AddLogging()
+                .AddScoped<Startup, Startup>()
+                .AddScoped<IReadContentService, ReadContentService>()
+                .AddScoped<IAPIConsumerService, APIConsumerService>()
+                .AddScoped<IFileConstructorService, FileConstructorService>()
+                .BuildServiceProvider();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.Configure<AppSettings>(hostContext.Configuration.GetSection("AppSettings"));
-                    services.AddScoped<IReadContentService, ReadContentService>();
-                    services.AddScoped<IAPIConsumerService, APIConsumerService>();
-                    services.AddScoped<IFileConstructorService, FileConstructorService>();
-                });
+            var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<Program>();
+            logger.LogDebug("Starting application");
+            var initiate = serviceProvider.GetService<Startup>();
+            initiate.Start();
+            logger.LogDebug("All done!");
+        }
     }
 }

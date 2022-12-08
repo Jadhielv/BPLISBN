@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BPLISBN.Services
 {
-    internal class APIConsumerService : IAPIConsumerService
+    public class APIConsumerService : IAPIConsumerService
     {
         private readonly ILogger<APIConsumerService> _logger;
         private readonly string? _apiEndpoint;
