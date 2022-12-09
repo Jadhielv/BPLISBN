@@ -48,38 +48,5 @@ namespace BPLISBN.Services
             _logger.LogInformation("End call the API");
             return null;
         }
-
-        public async void Run(string[] items, string fileName)
-        {
-            _logger.LogInformation("Call to the API");
-            var books = new List<Book>();
-
-            using (var httpClient = new HttpClient())
-            {
-                foreach (var item in items)
-                {
-                    var response = await httpClient.GetAsync($"{_apiEndpoint}/{item}.json");
-                    if (response.IsSuccessStatusCode && response.Content.Headers.ContentLength > 0)
-                    {
-                        var element = JsonConvert.DeserializeObject<Book>(await response.Content.ReadAsStringAsync());
-
-                        if (element != null)
-                        {
-                            element.DataRetrievalType = DataRetrievalType.Server;
-                            element.ISBN = item;
-                            books.Add(element);
-                        }
-                    }
-                    else
-                    {
-                        _logger.LogError($"Problem retrieving data from: {item}");
-                    }
-                }
-            }
-
-            if (books.Any())
-                BookContext.Instance.Books.AddRange(books);
-            _logger.LogInformation("End call the API");
-        }
     }
 }
