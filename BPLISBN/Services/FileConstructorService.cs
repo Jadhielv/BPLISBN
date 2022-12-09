@@ -31,7 +31,14 @@ namespace BPLISBN.Services
 
                 foreach (var item in items)
                 {
-                    writer.WriteLine($"{++rowNum},{item.DataRetrievalType.GetEnumDescription()},{item.ISBN},{item.title},{item.subtitle},{string.Join("; ", item.authors.Select(u => u.key))},{item.number_of_pages},{item.publish_date}");
+                    writer.WriteLine($"{++rowNum}," +
+                                     $"{item.DataRetrievalType.GetEnumDescription()}," +
+                                     $"{item.ISBN}," +
+                                     $"{item.title}," +
+                                     $"{item.subtitle}," +
+                                     $"{string.Join(", ", item.by_statement)}," +
+                                     $"{item.number_of_pages}," +
+                                     $"{item.publish_date}");
                 }
             }
 
