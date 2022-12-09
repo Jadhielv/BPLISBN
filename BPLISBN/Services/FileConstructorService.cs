@@ -36,9 +36,9 @@ namespace BPLISBN.Services
                                      $"{item.ISBN}," +
                                      $"{item.title}," +
                                      $"{item.subtitle}," +
-                                     $"{string.Join(", ", item.by_statement)}," +
+                                     $"{(item.by_statement != null ? item.by_statement.Replace(",", ";") : string.Empty)}," +
                                      $"{item.number_of_pages}," +
-                                     $"{item.publish_date}");
+                                     $"{item.publish_date.Replace(",", " ")}");
                 }
             }
 
